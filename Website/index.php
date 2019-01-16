@@ -4,7 +4,7 @@
   <title>Ravensweerd</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="database.php">
+ <!-- <link rel="stylesheet" href="database.php"> -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -25,6 +25,37 @@
   </style>
 </head>
 <body>
+
+<?php
+$servername = "10.0.0.210";
+$username = "sensor";
+$password = "buitenbankje123";
+$dbname = "vuilcontainerproject";
+
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+
+$sqlcon = "SELECT * FROM vuilcontainer";
+$resultcon = $conn->query($sqlcon);
+
+$sqlstat = "SELECT * FROM vuilcontainerStatus";
+$resultstat = $conn->query($sqlstat);
+
+$sqlvoor = "SELECT * FROM vuilcontainerVoorspelling";
+$resultvoor = $conn->query($sqlvoor);
+
+$conn->close();
+?>
 
 <nav class="navbar navbar-inverse visible-xs">
   <div class="container-fluid">
@@ -63,13 +94,29 @@
     <div class="col-sm-9">
       <div class="well">
         <h4>Aantal vuilcontainers</h4>
-        <p>Some text..</p>
+        <p>
+            <?php
+            echo $resultcon->num_rows;
+            ?>
+        </p>
       </div>
       <div class="row">
         <div class="col-sm-3">
           <div class="well">
-            <h4>Users</h4>
-            <p>1 Million</p> 
+            <h4>Totaal gewicht in KG</h4>
+            <p>
+                <?php
+                    $totaalGewicht = 0;
+                    if($resultstat->num_rows > 0) {
+                        while($row = $resultstat->fetch_assoc()){
+                            $totaalGewicht = $totaalGewicht + $row["gewichtKG"];
+                        }
+                        echo $totaalGewicht;
+                    } else {
+                        echo "Geen prullenbakken beschikbaar";
+                    }
+                ?>
+            </p> 
           </div>
         </div>
         <div class="col-sm-3">
