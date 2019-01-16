@@ -19,7 +19,7 @@ import mysql.connector
 def cleanAndExit():
     print("Cleaning...")
     GPIO.cleanup()
-    print("Bye!")
+    print("Cleaned!")
     sys.exit()
 
 
@@ -28,7 +28,6 @@ hx = HX711(5, 6)
 # Dit stukje moet nog gecalibreerd worden
 hx.set_reading_format("MSB", "MSB")
 hx.set_reference_unit(1)
-
 hx.reset()
 
 
@@ -49,7 +48,7 @@ def read_and_send():
         host="localhost",
         user="yourusename",
         passwd="yourpassword",
-        database="mydatabase"
+        database="VuildcontainerID"
     )
 
     mycursor = mydb.cursor()
