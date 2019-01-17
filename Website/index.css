@@ -1,0 +1,10 @@
+body {
+    background-color: beige;
+}
+
+h1 {
+    font-family: "Calibri", cursive, serif;
+    margin: auto;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+}

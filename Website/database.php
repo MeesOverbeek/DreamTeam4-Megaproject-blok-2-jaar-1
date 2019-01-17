@@ -46,12 +46,13 @@ $conn->close();*/
 }
 $conn->close();*/
 
-$sqlrecent = "SELECT * FROM vuilcontainerStatus 
+/*$sqlrecent = "SELECT * FROM vuilcontainerStatus t 
     INNER JOIN (
     SELECT FK_vuilcontainerID, max(datum) AS MaxDate
     FROM vuilcontainerStatus
-    group by FK_vuilcontainerID
-) tm on vuilcontainerStatus.FK_vuilcontainerID = tm.FK_vuilcontainerID and vuilcontainerStatus.datum = tm.MaxDate";
+    GROUP BY FK_vuilcontainerID
+) tm ON t.FK_vuilcontainerID = tm.FK_vuilcontainerID AND t.datum = tm.MaxDate";
+
 $resultrecent = $conn->query($sqlrecent);
 
 if($resultrecent->num_rows > 0){
@@ -61,5 +62,25 @@ if($resultrecent->num_rows > 0){
 } else {
     echo "0 results";
 }
-$conn->close();
+$conn->close();*/
+echo "<tr>
+<th> Vuilcontainer ID </th>
+<th> Vuilcontainer vol (in %) </th>
+<th> Gewicht (in KG) </th>
+<th> Datum meting </th>
+</tr>";
+
+if($resultstat->num_rows > 0) {
+while($row = mysqli_fetch_array($resultstat))
+{
+echo "<tr>";
+echo "<td>" . $row["FK_vuilcontainerID"] . "</td>";
+echo "<td>" . $row["percentageDiepte"] . "</td>";
+echo "<td>" . $row["gewichtKG"] . "</td>";
+echo "<td>" . $row["datum"] . "</td>";
+echo "</tr>";
+}
+}else{
+echo "0 results";
+}; 
 ?>

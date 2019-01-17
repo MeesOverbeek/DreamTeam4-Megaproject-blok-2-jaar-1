@@ -2,27 +2,8 @@
 <html lang="en">
 <head>
   <title>Ravensweerd</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="database.php">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 550px}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      background-color: #f1f1f1;
-      height: 100%;
-    }
-        
-    /* On small screens, set height to 'auto' for the grid */
-    @media screen and (max-width: 767px) {
-      .row.content {height: auto;} 
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
 
@@ -57,125 +38,69 @@ $resultvoor = $conn->query($sqlvoor);
 $conn->close();
 ?>
 
-<nav class="navbar navbar-inverse visible-xs">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#">Ravensweerd</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Dashboard</a></li>
-        <li><a href="#">Age</a></li>
-        <li><a href="#">Gender</a></li>
-        <li><a href="#">Geo</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<div class="container-fluid">
-  <div class="row content">
-    <div class="col-sm-3 sidenav hidden-xs">
-      <h2>Ravensweerd</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="#section1">Dashboard</a></li>
-        <li><a href="#section2">Age</a></li>
-        <li><a href="#section3">Gender</a></li>
-        <li><a href="#section3">Geo</a></li>
-      </ul><br>
-    </div>
-    <br>
+<h1>Ravensweerd</h1>
+<ul class="nav nav-pills nav-stacked">
+  <li class="active"><a href="#section1">Dashboard</a></li>
+  <li><a href="#section2">Age</a></li>
+  <li><a href="#section3">Gender</a></li>
+  <li><a href="#section3">Geo</a></li>
+</ul>
+<br>
+<br>
     
-    <div class="col-sm-9">
-      <div class="well">
-        <h4>Aantal vuilcontainers</h4>
-        <p>
-            <?php
-            echo $resultcon->num_rows;
-            ?>
-        </p>
-      </div>
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>Totaal gewicht in KG</h4>
-            <p>
-                <?php
-                    $totaalGewicht = 0;
-                    if($resultstat->num_rows > 0) {
-                        while($row = $resultstat->fetch_assoc()){
-                            $totaalGewicht = $totaalGewicht + $row["gewichtKG"];
-                        }
-                        echo $totaalGewicht;
-                    } else {
-                        echo "Geen prullenbakken beschikbaar";
-                    }
-                ?>
-            </p> 
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>Pages</h4>
-            <p>100 Million</p> 
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>Sessions</h4>
-            <p>10 Million</p> 
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>Bounce</h4>
-            <p>30%</p> 
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="well">
-            <p>Text</p> 
-            <p>Text</p> 
-            <p>Text</p> 
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="well">
-            <p>Text</p> 
-            <p>Text</p> 
-            <p>Text</p> 
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="well">
-            <p>Text</p> 
-            <p>Text</p> 
-            <p>Text</p> 
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-8">
-          <div class="well">
-            <p>Text</p> 
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="well">
-            <p>Text</p> 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<h4>Aantal vuilcontainers</h4>
+<p>
+  <?php
+    echo $resultcon->num_rows;
+  ?>
+</p>
+
+<h4>Totaal gewicht in KG</h4>
+<p>
+  <?php
+    $totaalGewicht = 0;
+    if($resultstat->num_rows > 0) {
+      while($row = $resultstat->fetch_assoc()){
+        $totaalGewicht = $totaalGewicht + $row["gewichtKG"];
+      }
+      echo $totaalGewicht;
+    } else {
+      echo "Geen prullenbakken beschikbaar";
+    }
+  ?>
+</p> 
+
+<h4>Pages</h4>
+<p>100 Million</p> 
+
+<h4>Sessions</h4>
+<p>10 Million</p> 
+
+<h4>Bounce</h4>
+<p>30%</p>
+
+<p>Text</p>
+<p>Text</p> 
+
+<?php
+  $all_property = array();
+  echo "<table class='data-table'>
+  <tr class='data-heading'>";
+  while($property = mysqli_fetch_field($resultstat)){
+    echo "<td>" . $property->name . "</td>";
+    array_push($all_property, $property->name);
+  }
+  echo "</tr>";
+
+  while($row = mysqli_fetch_array($resultstat)) {
+    echo "<tr>";
+    foreach ($all_property as $item) {
+      echo "<td>" . $row[$item] . "</td>";
+    }
+    echo "</tr>";
+  }
+  echo "</table>";
+?>
 
 </body>
 </html>
