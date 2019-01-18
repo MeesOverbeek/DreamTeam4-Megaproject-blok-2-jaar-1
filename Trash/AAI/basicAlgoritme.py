@@ -43,94 +43,58 @@ def data_randomizer():
 # Functie die een packet een x aantal weken aan data maakt
 def packet_creator():
     packet = []
-    for i in range(0, 100000):
+    for i in range(0, 10000):
         week_list = data_randomizer()
         packet.append(week_list)
 
     return packet
 
 
-# Dit is het "algoritme" dat zal bepalen welke dag de prullenbak gemiddeld vol raakt
-def algoritme():
-    packet = packet_creator()
-    results = []
-    week_days = []
-
-    for i in range(0, len(packet)):
-        result = test(packet[i], i + 1)
-        results.append(result)
-
-    for i in range(0, len(results)):
-        try:
-            to_remove = results.index("False")
-            results.pop(to_remove)
-        except ValueError:
-            pass
-
-    for i in range(0, len(results)):
-        to_add = results[i][0]
-        week_days.append(to_add)
-
-    avg_day = sum(week_days) / len(week_days)
-    print("De optimale dag om het afval te legen is dag: {}".format(round(avg_day)))
-
-
-def test(week, number):
+# Functie die checkt of de afval containers vol zijn en wanneer
+def checker(week, number):
     counter = 0
     last = 0
     while counter < 7:
         last = last + week[counter]
-
         if last >= 100:
-            print("Trash full at day: {} | Week: {}  | At {}%".format(counter, number, last))
-            message = [counter, True]
+            # print("Trash full at day: {} | Week: {}  | At {}%".format(counter, number, last))
+            message = [counter, True, last]
             counter -= counter
             return message
         elif counter == 6:
-            print("Trash at {}%         | Week: {}".format(last, number))
+            # print("Trash at {}%         | Week: {}".format(last, number))
             counter -= counter
             return "False"
 
         counter += 1
 
 
-# Checking if while loops are faster than for loops
-def algoritme2():
+# Dit is het "algoritme" dat zal bepalen welke dag de prullenbak gemiddeld vol raakt en op welk percentage
+def algoritme():
     packet = packet_creator()
     results = []
     week_days = []
+    full_per = []
 
-    count = 0
-    while count < len(packet):
-        result = test(packet[i], i + 1)
+    for i in range(0, len(packet)):
+        result = checker(packet[i], i + 1)
         results.append(result)
 
-        if count >= len(packet):
-            count -= count
-            break
-        count += 1
-
-    while count < len(results):
+    for i in range(0, len(results)):
         try:
             to_remove = results.index("False")
             results.pop(to_remove)
         except ValueError:
             pass
 
-        if count >= len(packet):
-            count -= count
-            break
-        count += 1
-
-    while count < len(results):
+    for i in range(0, len(results)):
         to_add = results[i][0]
+        add_per = results[i][2]
         week_days.append(to_add)
-
-        if count >= len(results):
-            count -= count
-            break
-        count += 1
+        full_per.append(add_per)
 
     avg_day = sum(week_days) / len(week_days)
-    print("De optimale dag om het afval te legen is dag: {}".format(round(avg_day)))
+    avg_per = sum(full_per) / len(full_per)
 
+    print("De optimale dag om het afval te legen is dag: {} | Met een gemiddelde vulling van {}%".format(round(avg_day),
+                                                                                                         round(avg_per)))
