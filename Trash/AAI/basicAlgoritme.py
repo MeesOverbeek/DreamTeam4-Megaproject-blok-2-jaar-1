@@ -1,13 +1,17 @@
-# 16-1-2019 Gijs Vis
-# Poging tot algoritme voor het bepalen van de optimale tijd om de prullenbakken te legen
-import random
+# Last updated: 18-1-2019 by Gijs Vis
+# Simpel algoritme voor het bepalen van de optimale tijd om de prullenbakken te legen
 
-# Deze functie zal semi random data crearen voor de average_day functie. De data is gebaseerd op het feit dat er dagen zijn waar er meer
-# afval gedumpt wordt. Dit omdat wij geen echte data hebben en dit de makkelijkste manier is om zelf veel data te creeëren
+import random
+import csv
+import datetime
+
+# Deze functie zal willekeurige data creeëren binnen een bepaalde range.
+# De data is gebaseerd op het feit dat er dagen zijn waar er meer afval gedumpt wordt.
+# Dit omdat wij geen echte data hebben en dit de makkelijkste manier is om zelf veel data te creeëren
+
 
 # Drukke dagen dinsdag en vrijdag maximale toename 40%. Rustige dagen maandag,donderdag,zondag maximale toename 15%.
 # Normale dagen: woensdag en zaterdag maximale toename 30%
-
 def data_randomizer():
     week = ["mon", "tue", "wen", "thu", "fri", "sat", "sun"]
 
@@ -98,3 +102,12 @@ def algoritme():
 
     print("De optimale dag om het afval te legen is dag: {} | Met een gemiddelde vulling van {}%".format(round(avg_day),
                                                                                                          round(avg_per)))
+    return_message = "De optimale dag om het afval te legen is dag: {} | Met een gemiddelde vulling van {}%".format(round(avg_day), round(avg_per))
+    time = datetime.datetime.now().strftime("%d-%m-%y | %H:%M:%S")
+
+    csvFile = "data.csv"
+    with open(csvFile, 'a') as dataCSV:
+        writer = csv.writer(dataCSV)
+
+        message =["Data toegevoegd: {} \n{}\n".format(time, return_message)]
+        writer.writerow(message)

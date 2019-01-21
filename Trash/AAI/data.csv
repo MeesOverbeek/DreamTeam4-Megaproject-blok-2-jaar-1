@@ -1,78 +1,12 @@
-def average(values):
-    valueLen = len(values)
-    # Gemiddelde berekenen van alle data
-    calculation1 = sum(values) / valueLen
-    # Berekent hoe lang het gemiddeld duurt voor het vullen per 5%
-    calculation2 = (calculation1 / 100) * 5
-    print("Het duurt {} dag(en) per 5% opvulling".format(calculation2))
-
-
-def average_day(values):
-    valuesLen = len(values)
-
-    mon = []
-    tue = []
-    wen = []
-    thu = []
-    fri = []
-    sat = []
-    sun = []
-
-    for i in range(0, valuesLen):
-        mon.append(values[i][0])
-        tue.append(values[i][1])
-        wen.append(values[i][2])
-        thu.append(values[i][3])
-        fri.append(values[i][4])
-        sat.append(values[i][5])
-        sun.append(values[i][6])
-
-    avgMon = sum(mon) / len(mon)
-    avgTue = sum(tue) / len(tue)
-    avgWen = sum(wen) / len(wen)
-    avgThu = sum(thu) / len(thu)
-    avgFri = sum(fri) / len(fri)
-    avgSat = sum(sat) / len(sat)
-    avgSun = sum(sun) / len(sun)
-
-    incTue = round(avgTue - avgMon)
-    incWen = round(avgWen - avgTue)
-    incThu = round(avgThu - avgWen)
-    incFri = round(avgFri - avgThu)
-    incSat = round(avgSat - avgFri)
-    incSun = round(avgSun - avgSat)
-
-    print("Average increases per day")
-    print("Mon | Tue | Wen | Thu | Fri | Sat | Sun")
-    print("{:2}% | {:2}% | {:2}% | {:2}% | {:2}% | {:2}% | {:2}%".format(round(avgMon), incTue, incWen, incThu, incFri, incSat, incSun))
-
-
-
-    for i in range(0, packet_len):
-        week_percentage = sum(packet[i])
-        percentages.append(week_percentage)
-
-        if week_percentage >= 100:
-            full_bool.append(True)
-        else:
-            full_bool.append(False)
-
-
-
-
- for i in range(0, len(week)):
-            last = last + week[i]
-            if last >= 100:
-                print("Trash full at day: {} | Week: {}".format(counter, i))
-            print(counter)
-            counter += 1
-            if counter == 7:
-                print("=========")
-
-
-
-    for i in range(0, packet_len):
-        week = packet[i]
-        counter = 0
-        last = 0
-        print(counter)
+"Data toegevoegd: 18-01-19 | 13:39:55 
+De optimale dag om het afval te legen is dag: 5 | Met een gemiddelde vulling van 107%
+"
+"Data toegevoegd: 18-01-19 | 13:40:09 
+De optimale dag om het afval te legen is dag: 5 | Met een gemiddelde vulling van 107%
+"
+"Data toegevoegd: 18-01-19 | 13:40:34 
+De optimale dag om het afval te legen is dag: 5 | Met een gemiddelde vulling van 107%
+"
+"Data toegevoegd: 18-01-19 | 14:22:49 
+De optimale dag om het afval te legen is dag: 5 | Met een gemiddelde vulling van 107%
+"
