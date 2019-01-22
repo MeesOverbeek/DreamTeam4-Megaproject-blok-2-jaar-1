@@ -10,6 +10,7 @@
 </head>
 <body>
 
+<!--Verbindt de website met de database en haalt er informatie uit-->
 <?php 
 $servername = "10.0.0.210";
 $username = "sensor";
@@ -38,6 +39,7 @@ $resultstat = $conn->query($sqlstat);
 $sqlvoor = "SELECT * FROM vuilcontainerVoorspelling";
 $resultvoor = $conn->query($sqlvoor);
 
+//Zorgt ervoor dat alle vuilcontainers met de laatste meting geselecteerd worden en sorteert op id nummering
 $sqlid = "SELECT * FROM vuilcontainerproject.vuilcontainerStatus 
 WHERE datum = (SELECT MAX(datum) FROM vuilcontainerStatus WHERE FK_vuilcontainerID = FK_vuilcontainerID)
 GROUP BY FK_vuilcontainerID
@@ -50,6 +52,7 @@ $conn->close();
 <div class="title">
 <h1>Ravensweerd - Tabel</h1>
 </div>
+<!--Maakt een lijst van de drie hoofdpagina's met links-->
 <ul>
   <li><a href="index.php">Dashboard</a></li>
   <li class="active">Alle vuilcontainers</li>
@@ -59,6 +62,7 @@ $conn->close();
 
 <h3>Vandaag is het</h3>
 <p>
+    <!--Vertelt de huidige tijd-->
   <?php
     echo date("d M Y - H:i");
   ?>
@@ -66,6 +70,7 @@ $conn->close();
 <br>
 <br>
 
+<!--Maakt een tabel-->
 <table>
     <thead>
         <td>Vuilcontainer ID</td>
@@ -75,6 +80,7 @@ $conn->close();
         <td><a href="tabledatum.php">Datum laatste meting</a></td>
     </thead>
     <tbody>
+        <!--Haalt de nodige informatie uit de database en stopt het in rijen-->
         <?php
             while($row = mysqli_fetch_array($resultid)) {
                 echo "<tr>";
