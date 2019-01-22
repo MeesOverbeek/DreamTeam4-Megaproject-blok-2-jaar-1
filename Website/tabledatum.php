@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<?php /*
+<?php 
 $servername = "10.0.0.210";
 $username = "sensor";
 $password = "buitenbankje123";
@@ -38,12 +38,14 @@ $resultstat = $conn->query($sqlstat);
 $sqlvoor = "SELECT * FROM vuilcontainerVoorspelling";
 $resultvoor = $conn->query($sqlvoor);
 
-$sqlid = "SELECT * FROM vuilcontainerproject.vuilcontainerStatus GROUP BY FK_vuilcontainerID
-ORDER BY LENGTH(FK_vuilcontainerID), FK_vuilcontainerID";
-$resultid = $conn->query($sqlid);
+$sqldatum = "SELECT * FROM vuilcontainerproject.vuilcontainerStatus 
+WHERE datum = (SELECT MAX(datum) FROM vuilcontainerStatus WHERE FK_vuilcontainerID = FK_vuilcontainerID)
+GROUP BY FK_vuilcontainerID 
+ORDER BY datum DESC";
+$resultdatum = $conn->query($sqldatum);
 
 $conn->close();
-*/
+
 ?>
 
 <div class="title">
@@ -74,64 +76,19 @@ $conn->close();
         <td>Datum laatste meting</td>
     </thead>
     <tbody>
-
+        <?php
+            while($row = mysqli_fetch_array($resultdatum)) {
+                echo "<tr>";
+                echo "<td>" . $row['FK_vuilcontainerID'] . "</td>";
+                echo "<td>" . $row['percentageDiepte'] . "</td>";
+                echo "<td>" . $row['diepteAfvalCM'] . "</td>";
+                echo "<td>" . $row['gewichtKG'] . "</td>";
+                echo "<td>" . $row['datum'] . "</td>";
+                echo "</tr>";
+            }
+        ?>
     </tbody>
 </table>
-
-<!--
-<table id="myTable">
-	
-    id of <col> tags should be "col" + index of table(1 = first table, 2 = second table) + _ (underscore) + column index(1.2.3.4...)
-    
-	<colgroup>
-		<col id="col1_1"></col>
-		<col id="col1_2"></col>
-		<col id="col1_3"></col>
-        <col id="col1_4"></col>
-        <col id="col1_5"></col>
-    </colgroup>
-    <div class="table">
-	<thead>
-		<tr>
-            <?php /*
-			echo "<td>Vuilcontainer ID</td>";
-            echo "<td>Percentage vol</td>";
-            echo "<td>Diepte afval in CM</td>";
-			echo "<td>Gewicht in KG</td>";
-            echo "<td>Datum laatste meting</td>";
-            ?>
-		</tr>
-	</thead>
-	<tbody>
-    <?php
-    $all_property = array();
-    echo "<table class='data-table' id='myTable'>
-    <tr class='data-heading'>";
-    while($property = mysqli_fetch_field($resultstat)){
-        array_push($all_property, $property->name);
-    }
-    echo "</tr>";
-
-    echo "<div class='highlightedColumn'>";
-    while($row = mysqli_fetch_array($resultstat)) {
-        echo "<tr>";
-        echo "<td>" . $row['FK_vuilcontainerID'] . "</td>";
-        echo "<td>" . $row['percentageDiepte'] . "</td>";
-        echo "<td>" . $row['diepteAfvalCM'] . "</td>";
-        echo "<td>" . $row['gewichtKG'] . "</td>";
-        echo "<td>" . $row['datum'] . "</td>";
-        echo "</tr>";
-    }
-    echo "</div>";
-    echo "</table>";
-    */
-    ?>
-    </tbody>
-</div>
-</table>
-<script type="text/javascript">
-initSortTable('myTable', Array('S', 'N', 'N', 'N', 'S'));
-</script>-->
 
 </body>
 </html>

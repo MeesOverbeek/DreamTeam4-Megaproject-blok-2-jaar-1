@@ -9,7 +9,7 @@
 
 <body>
 
-<?php /*
+<?php 
 $servername = "10.0.0.210";
 $username = "sensor";
 $password = "buitenbankje123";
@@ -43,7 +43,7 @@ $resultid = $conn-> query($sqlid);
 
 
 $conn->close();
-*/
+
 ?>
 
 <div class="title">
@@ -93,16 +93,9 @@ $conn->close();
 </p> 
 <br>
 
-<h3>Sessions</h3>
-<p>10 Million</p> 
+<h3>Uitleg AI Expert</h3>
+<p></p> 
 <br>
-
-<h3>Bounce</h3>
-<p>30%</p>
-
-<p>Text</p>
-<p>Text</p> 
-
 
 </body>
 </html>
