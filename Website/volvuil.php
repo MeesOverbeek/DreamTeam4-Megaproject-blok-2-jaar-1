@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Ravensweerd - Dashboard</title>
+  <title>Ravensweerd - Bijna volle vuilcontainers</title>
   <link rel="stylesheet" type="text/css" href="index.css?v=1.1">
-  <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
   <meta http-equiv="refresh" content="15">
+  <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
 </head>
 
 <body>
 
-<?php /*
+<?php
+
 $servername = "10.0.0.210";
 $username = "sensor";
 $password = "buitenbankje123";
@@ -34,75 +35,32 @@ $resultcon = $conn->query($sqlcon);
 $sqlstat = "SELECT * FROM vuilcontainerStatus";
 $resultstat = $conn->query($sqlstat);
 
+$sqlvol = "SELECT * FROM vuilcontainerStatus WHERE percentageDiepte > 79";
+$resultvol = $conn->query($sqlvol);
+
 $sqlvoor = "SELECT * FROM vuilcontainerVoorspelling";
 $resultvoor = $conn->query($sqlvoor);
 
-$sqlid = "SELECT vuilcontainerID FROM vuilcontainer";
-$resultid = $conn-> query($sqlid);
-
-
-
 $conn->close();
-*/
+
 ?>
 
 <div class="title">
-<h1>Ravensweerd - Dashboard</h1>
+<h1>Ravensweerd - Bijna volle vuilcontainers</h1>
 </div>
 <ul>
-  <li class="active">Dashboard</li>
+  <li><a href="index.php">Dashboard</a></li>
   <li><a href="table.php">Alle vuilcontainers</a></li>
-  <li><a href="volvuil.php">Bijna volle vuilcontainers</a></li>
+  <li class="active">Bijna volle vuilcontainers</li>
 </ul>
 <br>
-    
+
 <h3>Vandaag is het</h3>
 <p>
   <?php
     echo date("d M Y - H:i");
   ?>
 </p> 
-<br>
-<br>
-
-<h3>Aantal vuilcontainers</h3>
-<p>
-  <?php
-  $listid = array();
-  while($row=mysqli_fetch_assoc($resultid)){
-      $listid[] = $row;
-  }
-    echo count($listid)
-  ?>
-</p>
-<br>
-
-<h3>Totaal gewicht in KG</h3>
-<p>
-  <?php
-    $totaalGewicht = 0;
-    if($resultstat->num_rows > 0) {
-      while($row = $resultstat->fetch_assoc()){
-        $totaalGewicht = $totaalGewicht + $row["gewichtKG"];
-      }
-      echo $totaalGewicht;
-    } else {
-      echo "Geen prullenbakken beschikbaar";
-    }
-  ?>
-</p> 
-<br>
-
-<h3>Sessions</h3>
-<p>10 Million</p> 
-<br>
-
-<h3>Bounce</h3>
-<p>30%</p>
-
-<p>Text</p>
-<p>Text</p> 
-
 
 </body>
 </html>
