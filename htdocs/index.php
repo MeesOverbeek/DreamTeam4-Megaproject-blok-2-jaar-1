@@ -97,8 +97,23 @@ $conn->close();
     <br>
 
 <h3>Uitleg AI Expert</h3>
-<p></p> 
-<br>
+<p>Voor het AAI-gedeelte hebben we een algoritme geschreven dat berekent wat de beste dag is om de afvalcontainer te legen. <br>
+Dit wordt berekend aan de hand van het percentage dat de prullenbak elke dag gevuld wordt. <br>
+Het algoritme neemt van elke dag het percentage dat de container gevuld is en berekent op welke dag de prullenbak vol is. Dit kun je berekenen over zoveel weken als je wilt. <br>
+Als van de hoeveelheid weken dat het algoritme berekend is op welke dag de container vol raakt wordt er berekent op welke dag de container gemiddeld vol raakt. <br>
+Hieruit krijg je dan een dag in de week dat de container het beste geleegd kan worden. <br><br>
+Omdat wij op geen data hadden van de prullenbakken die er nu staan hebben wij hier een oplossing op gemaakt. <br>
+We hebben een stukje code gemaakt dat over de hoeveelheid weken dat je wilt data maakt. Dit doen we doormiddel van de Random functie. <br>
+We hebben bepaald dat er rustige dagen, normale dagen en drukke dagen zijn. <br>
+Op elke dag is er dan een maximaal percentage dat de prullenbak kan opvullen. <br>
+Hierdoor kunnen we dus een simulatie draaien van zoveel weken als je wilt. <br><br>
+Als voorbeeld:<br>
+Rustige dagen: max 15%, normale dagen: max 30%, drukke dagen: max 40%. <br>
+Als we dan 100.000 weken simuleren (1923 jaar) geeft het algoritme aan dat de beste dag om het afval te legen vrijdag is. <br>
+Dan zit de prullenbak gemiddeld voor 107% vol. <br>
+Dit betekend dus dat de prullenbak vrijdag vroeg op de dag geleegd moet worden zodat die niet overvol raakt, 
+maar als dit vroeg gebeurd zit de container dus net niet vol. 
+</p> 
 
 </body>
 </html>
