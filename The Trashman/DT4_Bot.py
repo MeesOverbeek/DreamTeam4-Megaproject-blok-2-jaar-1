@@ -22,7 +22,7 @@ def brain(message):
 
         # De opdrachte  checken of die bestaat en dan uitvoeren
         if command == "/info":
-            bot.sendMessage(chat_id, str("Hallo {}. Ik ben de Trashman ik kan data opvragen over de prullenbakken voor jou. https://www.youtube.com/watch?v=UmbeaMrFKFQ".format(user)))
+            bot.sendMessage(chat_id, str("Hallo {}. Ik ben de Trashman ik kan data opvragen over de prullenbakken voor jou. https://www.youtube.com/watch?v=YX7D3O_UtXs".format(user)))
 
         elif command == "/help":
             bot.sendMessage(chat_id, str("Opdrachten: /info, /containers, /check, /music"))
