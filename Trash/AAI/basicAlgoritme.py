@@ -47,7 +47,7 @@ def data_randomizer():
 # Functie die een packet een x aantal weken aan data maakt
 def packet_creator():
     packet = []
-    for i in range(0, 10000):
+    for i in range(0, 100000):
         week_list = data_randomizer()
         packet.append(week_list)
 
@@ -55,18 +55,16 @@ def packet_creator():
 
 
 # Functie die checkt of de afval containers vol zijn en wanneer
-def checker(week, number):
+def checker(week):
     counter = 0
     last = 0
     while counter < 7:
         last = last + week[counter]
         if last >= 100:
-            # print("Trash full at day: {} | Week: {}  | At {}%".format(counter, number, last))
             message = [counter, True, last]
             counter -= counter
             return message
         elif counter == 6:
-            # print("Trash at {}%         | Week: {}".format(last, number))
             counter -= counter
             return "False"
 
@@ -100,14 +98,12 @@ def algoritme():
     avg_day = sum(week_days) / len(week_days)
     avg_per = sum(full_per) / len(full_per)
 
-    print("De optimale dag om het afval te legen is dag: {} | Met een gemiddelde vulling van {}%".format(round(avg_day),
-                                                                                                         round(avg_per)))
+    print("De optimale dag om het afval te legen is dag: {} | Met een gemiddelde vulling van {}%".format(round(avg_day), round(avg_per)))
     return_message = "De optimale dag om het afval te legen is dag: {} | Met een gemiddelde vulling van {}%".format(round(avg_day), round(avg_per))
     time = datetime.datetime.now().strftime("%d-%m-%y | %H:%M:%S")
 
     csvFile = "data.csv"
     with open(csvFile, 'a') as dataCSV:
         writer = csv.writer(dataCSV)
-
         message =["Data toegevoegd: {} \n{}\n".format(time, return_message)]
         writer.writerow(message)
