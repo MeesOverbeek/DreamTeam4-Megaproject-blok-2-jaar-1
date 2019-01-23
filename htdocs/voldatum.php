@@ -2,7 +2,7 @@
 <html>
 <head>
 
-<title>Ravensweerd - Alle vuilcontainers</title>
+<title>Ravensweerd - Bijna volle vuilcontainers</title>
 <link rel="stylesheet" type="text/css" href="index.css">
 <meta http-equiv="refresh" content="15">
 <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
