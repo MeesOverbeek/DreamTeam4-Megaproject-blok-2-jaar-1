@@ -22,10 +22,13 @@ def brain(message):
 
         # De opdrachte  checken of die bestaat en dan uitvoeren
         if command == "/info":
-            bot.sendMessage(chat_id, str("Hallo {}. Ik ben de Trashman ik kan data opvragen over de prullenbakken voor jou. https://www.youtube.com/watch?v=YX7D3O_UtXs".format(user)))
+            bot.sendMessage(chat_id, str("Hallo {}. Ik ben de Trashman ik kan data opvragen over de prullenbakken voor jou. https://media.giphy.com/media/2w6I6nCyf5rmy5SHBy/giphy.gif".format(user)))
 
         elif command == "/help":
             bot.sendMessage(chat_id, str("Opdrachten: /info, /containers, /check, /music"))
+
+        elif command == "/music":
+            bot.sendMessage(chat_id, str("Mijn favoriete liedje: https://soundcloud.com/rampantgoddess/garbage-tyler-the-creator"))
 
         # Deze opdracht geeft aan de gebruiker de ID's van de containers terug.
         elif command == "/containers":
@@ -60,9 +63,6 @@ def brain(message):
 
         elif command == "/check":
             bot.sendMessage(chat_id, str("Voer /check [container ID] anders werk ik niet"))
-
-        elif command == "/music":
-            bot.sendMessage(chat_id, str("Mijn favoriete liedje: https://www.youtube.com/watch?v=pzHpB9aB2p4"))
 
         # Als de opdracht die de gebruiker stuurt nergens mee overeenkomt krijgt hij/zij een melding
         else:
