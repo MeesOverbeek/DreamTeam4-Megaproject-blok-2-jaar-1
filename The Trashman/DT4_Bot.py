@@ -30,7 +30,7 @@ def brain(message):
             bot.sendMessage(chat_id, str("Functies: /containers,\n/check[container ID], /werk, /extra"))
 
         elif command == "/extra":
-            bot.sendMessage(chat_id, str("Extra functies die ik kan: /info, /music, /versie"))
+            bot.sendMessage(chat_id, str("Extra functies die ik kan uitvoeren:\n /info, /music, /versie"))
 
         elif command == "/versie":
             bot.sendMessage(chat_id, str("Versie: 1.06, Gemaakt door: Hei5enberg, https://github.com/Hei5enberg."
@@ -163,7 +163,7 @@ def database_requests(mode, modifier):
 
 
 # Setup van de bot
-bot = telepot.Bot("777456350:AAGqUUcGe8jfiYuszM9V6p2ArrRbBTVRR3Y")
+bot = telepot.Bot("Si Sa Secret")
 print("Checking connection: ")
 print(bot.getMe())
 
