@@ -27,7 +27,7 @@ def brain(message):
                                          "https://media.giphy.com/media/2w6I6nCyf5rmy5SHBy/giphy.gif".format(user)))
 
         elif command == "/help":
-            bot.sendMessage(chat_id, str("Opdrachten: /containers, /check, /extra"))
+            bot.sendMessage(chat_id, str("Functies: /containers,\n/check[container ID], /werk, /extra"))
 
         elif command == "/extra":
             bot.sendMessage(chat_id, str("Extra functies die ik kan: /info, /music, /versie"))
@@ -72,6 +72,23 @@ def brain(message):
 
         elif command == "/check":
             bot.sendMessage(chat_id, str("Voer /check [container ID] anders werk ik niet"))
+
+        elif command == "/werk":
+            try:
+                check = database_requests(2, "empty")
+                message = "Deze containers moeten geleegd worden: "
+
+                for i in range(0, len(check)):
+                    if i == len(check) - 1:
+                        insert = "{}: {}%".format(check[i][0], check[i][1])
+                        message += insert
+                    else:
+                        insert = "{}: {}% | ".format(check[i][0], check[i][1])
+                        message += insert
+
+                bot.sendMessage(chat_id, str(message))
+            except pymysql.err.OperationalError:
+                bot.sendMessage(chat_id, str("Geen connectie met de database. Excuses voor het ongemak"))
 
         # Als de opdracht die de gebruiker stuurt nergens mee overeenkomt krijgt hij/zij een melding
         else:
@@ -133,6 +150,16 @@ def database_requests(mode, modifier):
                 return [True, packet[counter]]
             else:
                 counter += 1
+
+    # Checkt welke containers 90% vol zijn
+    elif mode == 2:
+        return_packet = []
+        for i in range(0, len(packet)):
+            current = packet[i][1]
+            if current >= 95:
+                return_packet.append([packet[i][0],current])
+
+        return return_packet
 
 
 # Setup van de bot
