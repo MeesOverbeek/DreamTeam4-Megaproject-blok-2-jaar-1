@@ -4,7 +4,6 @@ import random
 from ECHO_SENSOR_1 import *
 from ECHO_SENSOR_2 import *
 import MySQLdb
-from WEIGHT import *
 import datetime
 
 def executor():
@@ -58,7 +57,7 @@ def INSERT_SQL(FK_vuilcontainerID, percentageDiepte, diepteAfvalCM, gewichtKG, d
 #VOORBEELD
 
 try:
-	INSERT_SQL("VC69", GemCalc(), CmCalc(), weight(), datetime.datetime.now())
+	INSERT_SQL("VC69", GemCalc(), CmCalc(), random.randint(1, 5), datetime.datetime.now())
 	db.commit()
 except:
 	db.rollback
