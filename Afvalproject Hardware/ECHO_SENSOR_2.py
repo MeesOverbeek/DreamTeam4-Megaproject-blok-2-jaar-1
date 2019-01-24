@@ -3,7 +3,6 @@ import time
 
 GPIO.setwarnings(False)
 GPIO.cleanup()
-GPIO.setmode(GPIO.BOARD)
 
 def afstand_2():    
     try:
@@ -31,13 +30,17 @@ def afstand_2():
       TotaalTijd_2 = EindTijd_2 - StartTijd_2
       
       Afstand_2 = round(TotaalTijd_2 * 17150, 2)
+      if Afstand_2 < 50 and Afstand_2 > 0:
+        content = open('Centimeters.txt','a')
+        content.write(str('\n')+'{}'.format(round(Afstand_2)))
       
-      BiepBoep_2 = (Afstand_2 * 100 / 100)
+      BiepBoep_2 = (Afstand_2 * 2)
       Percentage_2 = (100 - BiepBoep_2)
-      if Afstand_2 < 100.00 and Afstand_2 > 0.01:
-        print("procent vol",Percentage_2,"%")
+      if Afstand_2 < 50 and Afstand_2 > 0:
+        content = open('Waarden.txt','a')
+        content.write(str('\n')+'{}'.format(round(Percentage_2)))
 
     finally:
-      GPIO.cleanup()
+        GPIO.cleanup()
     
     return afstand_2
