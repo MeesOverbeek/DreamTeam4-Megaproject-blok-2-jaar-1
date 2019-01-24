@@ -1,9 +1,10 @@
-# 23-1-2019 GD Vis
+# Last edited: 24-1-2019 GD Vis
 # Source bot: https://maker.pro/raspberry-pi/projects/how-to-create-a-telegram-bot-with-a-raspberry-pi
 import telepot
 from telepot.loop import MessageLoop
 from time import sleep
 import pymysql
+import datetime
 
 
 # Deze functie checkt de inputs van de gebruikers en geeft daarop informatie terug aan de gebruiker
@@ -19,6 +20,9 @@ def brain(message):
         # Hierdoor kun je vanaf de server zien welke gebruiker welke opdracht aanvraagt
         print("Received:")
         print("{} | From: {}, id: {}".format(command, user, user_id))
+
+        to_log = "{} | From: {}, id: {}".format(command, user, user_id)
+        logger(to_log)
 
         # De opdrachte  checken of die bestaat en dan uitvoeren
         if command == "/info":
@@ -37,7 +41,8 @@ def brain(message):
                                          "   !!! Dit is een prototype !!!"))
 
         elif command == "/music":
-            bot.sendMessage(chat_id, str("Mijn favoriete liedje: https://soundcloud.com/rampantgoddess/garbage-tyler-the-creator"))
+            bot.sendMessage(chat_id, str("Mijn favoriete liedje Garbage: ¯\_(ツ)_/¯\n"
+                                         "https://soundcloud.com/rampantgoddess/garbage-tyler-the-creator"))
 
         # Deze opdracht geeft aan de gebruiker de ID's van de containers terug.
         elif command == "/containers":
@@ -162,13 +167,27 @@ def database_requests(mode, modifier):
         return return_packet
 
 
-# Setup van de bot
-bot = telepot.Bot("Si Sa Secret")
-print("Checking connection: ")
-print(bot.getMe())
+# Functie die chat ontvangsten opslaat wss beetje tegen AVG ¯\_(ツ)_/¯
+def logger(message):
+    file = open("chat_log.txt", "a+")
 
-MessageLoop(bot, brain).run_as_thread()
-print("Listening.....")
+    today = datetime.datetime.today()
+    timeData = today.strftime("%H:%M:%S | %d %b %y")
+
+    file.write("{} at {}\n".format(message, timeData))
+    file.close()
+
+
+# Setup van de bot
+try:
+    bot = telepot.Bot("Si Sa Secret")
+    print("Checking connection: ")
+    print(bot.getMe())
+
+    MessageLoop(bot, brain).run_as_thread()
+    print("Listening.....")
+except:
+    print("*** ERROR STARTING BOT ***")
 
 # While loop zodat de bot aanblijft
 while 1:
