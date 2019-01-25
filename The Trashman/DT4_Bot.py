@@ -21,7 +21,7 @@ def brain(message):
         print("Received:")
         print("{} | From: {}, id: {}".format(command, user, user_id))
 
-        to_log = "{} | From: {}, id: {}".format(command, user, user_id)
+        to_log = "{} | From: {}".format(command, user)
         logger(to_log)
 
         # De opdrachte  checken of die bestaat en dan uitvoeren
@@ -37,8 +37,7 @@ def brain(message):
             bot.sendMessage(chat_id, str("Extra functies die ik kan uitvoeren:\n /info, /music, /versie"))
 
         elif command == "/versie":
-            bot.sendMessage(chat_id, str("Versie: 1.06, Gemaakt door: Hei5enberg, https://github.com/Hei5enberg."
-                                         "   !!! Dit is een prototype !!!"))
+            bot.sendMessage(chat_id, str("Versie: 1.06, Gemaakt door: Hei5enberg, https://github.com/Hei5enberg."))
 
         elif command == "/music":
             bot.sendMessage(chat_id, str("Mijn favoriete liedje Garbage: ¯\_(ツ)_/¯\n"
