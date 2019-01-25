@@ -10,29 +10,31 @@ import datetime
 '''definieer twee functie die het gemiddelde
 van de beide sensoren berekenen'''
 
-def GemCalc():
-    waarde1=420
-    waarde2=420
-    while waarde1 >100:
-        waarde1=afstand_1()[1]
-    while waarde2 >100:
-        waarde2=afstand_2()[1]
-    return (waarde1 + waarde2) / 2
 
 
 def CmCalc():
-    waardeCm1 = 420
+    waardeCm1 = 69
     waardeCm2 = 420
     while waardeCm1 > 50:
-        waardeCm1=round(afstand_1()[0])
+        waardeCm1 = afstand_1()
+        
     while waardeCm2 > 50:
-        waardeCm2 = round(afstand_2()[0])
-        '''
-        50cm hoogte van PoC afvalbak, dus 50 - (waardeCm1 + waardeCm2) / 2 
-        '''
-    return 50 - (waardeCm1 + waardeCm2) / 2
+        waardeCm2 = afstand_2()
+    antwoord = round(50 - (waardeCm1 + waardeCm2) / 2)
+    print('waardeCm1 is {}, waardeCm2 is {} en het totaal is {}'.format(waardeCm1, waardeCm1, antwoord))
+   
+    '50cm hoogte van PoC afvalbak, dus 50 - (waardeCm1 + waardeCm2) / 2 '
+    return antwoord
 
+    
+#print(GemCalc(),CmCalc())
 
+def ProCalc():
+    #procent= 100-((afstand_1() + afstand_2()) * 100 / 50)
+    procent=CmCalc() * 100 / 50
+    print('De vuilcontainer is voor {}% vol'.format(procent))
+    return procent
+    
 #SETUP
 db=MySQLdb.connect(host="10.0.0.210",user="sensor",
                   passwd="buitenbankje123",db="vuilcontainerproject")
@@ -47,10 +49,12 @@ def INSERT_SQL(FK_vuilcontainerID, percentageDiepte, diepteAfvalCM, gewichtKG, d
 while True:
     
     try:
-        INSERT_SQL("VC69", GemCalc(), CmCalc(), random.randint(1, 5), datetime.datetime.now())
+        INSERT_SQL("VC69", ProCalc(), CmCalc(), random.randint(1, 5), datetime.datetime.now())
         db.commit()
+        print('verstoert')
     except:
         db.rollback
+        print('noet versoert')
+    
     time.sleep(10)
-
 db.close()

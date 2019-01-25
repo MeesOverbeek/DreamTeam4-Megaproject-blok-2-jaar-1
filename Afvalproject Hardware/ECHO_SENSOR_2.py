@@ -17,9 +17,13 @@ def afstand_2():
 
       #de sensor callibreert hier en stuurt en ontvangt hier geluiden
       GPIO.output(PIN_TRIGGER_2, GPIO.LOW)
+      
       time.sleep(2)
+      
       GPIO.output(PIN_TRIGGER_2, GPIO.HIGH)
+      
       time.sleep(0.00001)
+      
       GPIO.output(PIN_TRIGGER_2, GPIO.LOW)
 
       #geeft de tijd tussen het begin en eind van het geluidje
@@ -27,15 +31,11 @@ def afstand_2():
             StartTijd_2 = time.time()
       while GPIO.input(PIN_ECHO_2)==1:
             EindTijd_2 = time.time()
-      
-      #berekent de afstand in cm en daaruit het % vol in de container
       TotaalTijd_2 = EindTijd_2 - StartTijd_2
-      Afstand_2 = round(TotaalTijd_2 * 17150, 2)      
-      BiepBoep_2 = (Afstand_2 * 100 / 50)
-      Percentage_2 = (100 - BiepBoep_2)
-      if Afstand_2 < 50 and Afstand_2 > 0:
-          return Afstand_2, Percentage_2
- 
-
+    
+      #berekent de afstand in cm en daaruit het % vol in de container
+      Afstand_2 = round(TotaalTijd_2 * 17150, 2)   
+      return Afstand_2
+      
     finally:
         GPIO.cleanup()
