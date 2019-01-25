@@ -6,6 +6,22 @@ from time import sleep
 import pymysql
 import datetime
 
+connection = [True]
+
+
+# Deze functie verandert de status van de database. Dit voorkomt dat als de database offline is de gebruiker elke keer
+# op een time-out moet wachten. Hierdoor wordt de bot dus niet sloom.
+def connection_status(status):
+    try:
+        if not status:
+            connection.remove(True)
+            connection.append(False)
+        elif status:
+            connection.remove(False)
+            connection.append(True)
+    except ValueError:
+        print("\n*** STATUS PARAMATER ERROR ***\n")
+
 
 # Deze functie checkt de inputs van de gebruikers en geeft daarop informatie terug aan de gebruiker
 def brain(message):
@@ -34,7 +50,8 @@ def brain(message):
             bot.sendMessage(chat_id, str("Functies: /containers,\n/check[container ID], /werk, /extra"))
 
         elif command == "/extra":
-            bot.sendMessage(chat_id, str("Extra functies die ik kan uitvoeren:\n /info, /music, /versie"))
+            bot.sendMessage(chat_id, str("Extra functies die ik kan uitvoeren:\n /info, /music, /versie, "
+                                         "/database (checkt de status van de database)"))
 
         elif command == "/versie":
             bot.sendMessage(chat_id, str("Versie: 1.06, Gemaakt door: Hei5enberg, https://github.com/Hei5enberg."))
@@ -43,8 +60,16 @@ def brain(message):
             bot.sendMessage(chat_id, str("Mijn favoriete liedje Garbage: ¯\_(ツ)_/¯\n"
                                          "https://soundcloud.com/rampantgoddess/garbage-tyler-the-creator"))
 
+        # Als de database als offline is zal de gebruiker deze berichten krijgen zodat er niet elke keer een timeout hoeft te gebeuren
+        elif command == "/containers" and not connection[0]:
+            bot.sendMessage(chat_id, str("Geen connectie met de database. Excuses voor het ongemak"))
+        elif command.startswith("/check ") and not connection:
+            bot.sendMessage(chat_id, str("Geen connectie met de database. Excuses voor het ongemak"))
+        elif command == "/werk" and not connection:
+            bot.sendMessage(chat_id, str("Geen connectie met de database. Excuses voor het ongemak"))
+
         # Deze opdracht geeft aan de gebruiker de ID's van de containers terug.
-        elif command == "/containers":
+        elif command == "/containers" and connection[0]:
             try:
                 message = database_requests(0, "empty")
 
@@ -54,14 +79,16 @@ def brain(message):
                         containers += "{}.".format(message[i])
                     else:
                         containers += "{}, ".format(message[i])
-
                 bot.sendMessage(chat_id, str("Alle container ID's: {}").format(containers))
             except pymysql.err.OperationalError:
                 bot.sendMessage(chat_id, str("Geen connectie met de database. Excuses voor het ongemak"))
-                print("*** NO CONNECTION WITH DATABASE ***")
+                # Dit stukje veranderd de status van de database
+                connection_status(False)
+                print("\n*** NO CONNECTION WITH DATABASE ***\n")
+                print("Connection status now: {}".format(connection[0]))
 
         # Met deze command kan de gebruiker de informatie die de database van de container heeft checken en terugsturen aan de gebruiker
-        elif command.startswith("/check "):
+        elif command.startswith("/check ") and connection[0]:
             try:
                 try:
                     check = database_requests(1, command[7:])
@@ -74,12 +101,14 @@ def brain(message):
                     bot.sendMessage(chat_id, str("Container niet gevonden. Probeer opnieuw: /check [container ID]"))
             except pymysql.err.OperationalError:
                 bot.sendMessage(chat_id, str("Geen connectie met de database. Excuses voor het ongemak"))
-                print("*** NO CONNECTION WITH DATABASE ***")
+                # Dit stukje veranderd de status van de database
+                connection_status(False)
+                print("\n*** NO CONNECTION WITH DATABASE ***\n")
 
         elif command == "/check":
             bot.sendMessage(chat_id, str("Voer /check [container ID] anders werk ik niet"))
 
-        elif command == "/werk":
+        elif command == "/werk" and connection[0]:
             try:
                 check = database_requests(2, "empty")
                 message = "Deze containers moeten geleegd worden: "
@@ -95,7 +124,20 @@ def brain(message):
                 bot.sendMessage(chat_id, str(message))
             except pymysql.err.OperationalError:
                 bot.sendMessage(chat_id, str("Geen connectie met de database. Excuses voor het ongemak"))
-                print("*** NO CONNECTION WITH DATABASE ***")
+                # Dit stukje veranderd de status van de database
+                connection_status(False)
+                print("\n*** NO CONNECTION WITH DATABASE ***\n")
+
+        # Functie om te checken of de database online is.
+        elif command == "/database":
+            try:
+                database_requests(0, "empty")
+                connection_status(True)
+                print("\n*** DATA BASE BACK ONLINE ***\n")
+                bot.sendMessage(chat_id, str("Database weer online!"))
+            except pymysql.err.OperationalError:
+                bot.sendMessage(chat_id, str("Nog steeds geen connectie met database mogelijk :("))
+                print("\n*** STILL NO CONNECTION WITH DATABASE ***\n")
 
         # Als de opdracht die de gebruiker stuurt nergens mee overeenkomt krijgt hij/zij een melding
         else:
