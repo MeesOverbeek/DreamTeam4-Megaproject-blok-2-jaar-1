@@ -59,6 +59,7 @@ def brain(message):
                 bot.sendMessage(chat_id, str("Alle container ID's: {}").format(containers))
             except pymysql.err.OperationalError:
                 bot.sendMessage(chat_id, str("Geen connectie met de database. Excuses voor het ongemak"))
+                print("*** NO CONNECTION WITH DATABASE ***")
 
         # Met deze command kan de gebruiker de informatie die de database van de container heeft checken en terugsturen aan de gebruiker
         elif command.startswith("/check "):
@@ -74,6 +75,7 @@ def brain(message):
                     bot.sendMessage(chat_id, str("Container niet gevonden. Probeer opnieuw: /check [container ID]"))
             except pymysql.err.OperationalError:
                 bot.sendMessage(chat_id, str("Geen connectie met de database. Excuses voor het ongemak"))
+                print("*** NO CONNECTION WITH DATABASE ***")
 
         elif command == "/check":
             bot.sendMessage(chat_id, str("Voer /check [container ID] anders werk ik niet"))
@@ -94,6 +96,7 @@ def brain(message):
                 bot.sendMessage(chat_id, str(message))
             except pymysql.err.OperationalError:
                 bot.sendMessage(chat_id, str("Geen connectie met de database. Excuses voor het ongemak"))
+                print("*** NO CONNECTION WITH DATABASE ***")
 
         # Als de opdracht die de gebruiker stuurt nergens mee overeenkomt krijgt hij/zij een melding
         else:
@@ -167,7 +170,7 @@ def database_requests(mode, modifier):
         return return_packet
 
 
-# Functie die chat ontvangsten opslaat wss beetje tegen AVG ¯\_(ツ)_/¯
+# Functie die chat ontvangsten opslaat waarschijnlijk beetje tegen AVG ¯\_(ツ)_/¯
 def logger(message):
     file = open("chat_log.txt", "a+")
 
