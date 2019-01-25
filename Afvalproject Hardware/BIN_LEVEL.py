@@ -27,6 +27,9 @@ def CmCalc():
         waardeCm1=round(afstand_1()[0])
     while waardeCm2 > 50:
         waardeCm2 = round(afstand_2()[0])
+        '''
+        50cm hoogte van PoC afvalbak, dus 50 - (waardeCm1 + waardeCm2) / 2 
+        '''
     return 50 - (waardeCm1 + waardeCm2) / 2
 
 
@@ -44,11 +47,10 @@ def INSERT_SQL(FK_vuilcontainerID, percentageDiepte, diepteAfvalCM, gewichtKG, d
 while True:
     
     try:
-        INSERT_SQL("VC69", GemCalc(), CmCalc(), weight(), datetime.datetime.now())
+        INSERT_SQL("VC69", GemCalc(), CmCalc(), random.randint(1, 5), datetime.datetime.now())
         db.commit()
     except:
         db.rollback
     time.sleep(10)
 
 db.close()
-
