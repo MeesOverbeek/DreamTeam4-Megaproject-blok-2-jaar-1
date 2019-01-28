@@ -14,10 +14,10 @@ connection = [True]
 def connection_status(status):
     try:
         if not status:
-            connection.remove(True)
+            connection.remove(connection[0])
             connection.append(False)
         elif status:
-            connection.remove(False)
+            connection.remove(connection[0])
             connection.append(True)
     except ValueError:
         print("\n*** STATUS PARAMATER ERROR ***\n")
@@ -37,7 +37,7 @@ def brain(message):
         print("Received:")
         print("{} | From: {}, id: {}".format(command, user, user_id))
 
-        to_log = "{} | From: {}".format(command, user)
+        to_log = "{:20} | From: {}".format(command, user)
         logger(to_log)
 
         # De opdrachte  checken of die bestaat en dan uitvoeren
@@ -47,11 +47,11 @@ def brain(message):
                                          "https://media.giphy.com/media/2w6I6nCyf5rmy5SHBy/giphy.gif".format(user)))
 
         elif command == "/help":
-            bot.sendMessage(chat_id, str("Functies: /containers,\n/check[container ID], /werk, /extra"))
+            bot.sendMessage(chat_id, str("Functies: /containers,\n/check [container ID], /werk, /extra"))
 
         elif command == "/extra":
             bot.sendMessage(chat_id, str("Extra functies die ik kan uitvoeren:\n /info, /music, /versie, "
-                                         "/database (checkt de status van de database)"))
+                                         "/database [wachtwoord] (checkt de status van de database)"))
 
         elif command == "/versie":
             bot.sendMessage(chat_id, str("Versie: 1.06, Gemaakt door: Hei5enberg, https://github.com/Hei5enberg."))
@@ -63,9 +63,9 @@ def brain(message):
         # Als de database als offline is zal de gebruiker deze berichten krijgen zodat er niet elke keer een timeout hoeft te gebeuren
         elif command == "/containers" and not connection[0]:
             bot.sendMessage(chat_id, str("Geen connectie met de database. Excuses voor het ongemak"))
-        elif command.startswith("/check ") and not connection:
+        elif command.startswith("/check ") and not connection[0]:
             bot.sendMessage(chat_id, str("Geen connectie met de database. Excuses voor het ongemak"))
-        elif command == "/werk" and not connection:
+        elif command == "/werk" and not connection[0]:
             bot.sendMessage(chat_id, str("Geen connectie met de database. Excuses voor het ongemak"))
 
         # Deze opdracht geeft aan de gebruiker de ID's van de containers terug.
@@ -129,15 +129,19 @@ def brain(message):
                 print("\n*** NO CONNECTION WITH DATABASE ***\n")
 
         # Functie om te checken of de database online is.
-        elif command == "/database":
+        elif command == "/database nopass":
             try:
                 database_requests(0, "empty")
                 connection_status(True)
                 print("\n*** DATA BASE BACK ONLINE ***\n")
                 bot.sendMessage(chat_id, str("Database weer online!"))
             except pymysql.err.OperationalError:
+                connection_status(False)
                 bot.sendMessage(chat_id, str("Nog steeds geen connectie met database mogelijk :("))
                 print("\n*** STILL NO CONNECTION WITH DATABASE ***\n")
+
+        elif command == "/database":
+            bot.sendMessage(chat_id, str("Voer a.u.b het wachtwoord in\n /database [wachtwoord]"))
 
         # Als de opdracht die de gebruiker stuurt nergens mee overeenkomt krijgt hij/zij een melding
         else:
@@ -224,7 +228,7 @@ def logger(message):
 
 # Setup van de bot
 try:
-    bot = telepot.Bot("777456350:AAGqUUcGe8jfiYuszM9V6p2ArrRbBTVRR3Y")
+    bot = telepot.Bot("Si Sa Secret")
     print("Checking connection: ")
     print(bot.getMe())
 
