@@ -41,7 +41,7 @@ def data_randomizer():
         elif i == 1:
             week[week.index("fri")] = increase
 
-    return(week)
+    return week
 
 
 # Functie die een packet een x aantal weken aan data maakt

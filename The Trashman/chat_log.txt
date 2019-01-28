@@ -126,3 +126,25 @@ Ninja has ligma | From: Wilco at 15:19:27 | 25 Jan 19
 /containers | From: Wilco at 15:20:29 | 25 Jan 19
 /containers | From: Wilco at 15:20:30 | 25 Jan 19
 /containers | From: Wilco at 15:22:03 | 25 Jan 19
+/containers | From: Gijs at 15:23:34 | 25 Jan 19
+/containers | From: Gijs at 15:23:57 | 25 Jan 19
+/database | From: Gijs at 15:24:06 | 25 Jan 19
+/containers | From: Gijs at 15:24:12 | 25 Jan 19
+/database | From: Gijs at 15:24:15 | 25 Jan 19
+/containers | From: Gijs at 15:24:32 | 25 Jan 19
+/containers | From: Gijs at 15:24:42 | 25 Jan 19
+/containers | From: Gijs at 15:24:47 | 25 Jan 19
+/database | From: Gijs at 15:24:50 | 25 Jan 19
+/database | From: Gijs at 15:24:51 | 25 Jan 19
+/containers | From: Gijs at 15:24:53 | 25 Jan 19
+Hh | From: Gijs at 15:24:56 | 25 Jan 19
+/help | From: Gijs at 15:25:43 | 25 Jan 19
+/containers | From: Gijs at 15:25:45 | 25 Jan 19
+/check | From: Gijs at 15:25:46 | 25 Jan 19
+/check VC1 | From: Gijs at 15:25:54 | 25 Jan 19
+/werk | From: Gijs at 15:26:03 | 25 Jan 19
+/extra | From: Gijs at 15:26:06 | 25 Jan 19
+/info | From: Gijs at 15:26:08 | 25 Jan 19
+/music | From: Gijs at 15:26:11 | 25 Jan 19
+/versie | From: Gijs at 15:26:14 | 25 Jan 19
+/database | From: Gijs at 15:26:17 | 25 Jan 19
