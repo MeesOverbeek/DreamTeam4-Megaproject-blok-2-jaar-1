@@ -40,10 +40,9 @@ $sqlvoor = "SELECT * FROM vuilcontainerVoorspelling";
 $resultvoor = $conn->query($sqlvoor);
 
 //Zorgt ervoor dat alle vuilcontainers met de laatste meting geselecteerd worden en sorteert op id nummering
-$sqlid = "SELECT * FROM vuilcontainerproject.vuilcontainerStatus 
-WHERE datum = (SELECT MAX(datum) FROM vuilcontainerStatus WHERE FK_vuilcontainerID = FK_vuilcontainerID)
-GROUP BY FK_vuilcontainerID
-ORDER BY LENGTH(FK_vuilcontainerID), FK_vuilcontainerID";
+$sqlid = "SELECT * 
+FROM vuilcontainerStatus 
+WHERE datum IN (SELECT MAX(datum) FROM vuilcontainerStatus GROUP BY FK_vuilcontainerID)";
 $resultid = $conn->query($sqlid);
 
 $conn->close();
