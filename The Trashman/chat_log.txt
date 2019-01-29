@@ -8,3 +8,9 @@
 /help                | From: Gijs at 13:36:28 | 28 Jan 19
 /containers          | From: Gijs at 13:36:31 | 28 Jan 19
 /check               | From: Gijs at 13:36:34 | 28 Jan 19
+/containers          | From: Gijs at 09:09:31 | 29 Jan 19
+/containers          | From: Gijs at 09:09:43 | 29 Jan 19
+/info                | From: Rick at 09:09:55 | 29 Jan 19
+/check VC69          | From: Rick at 09:10:04 | 29 Jan 19
+/containers          | From: Gijs at 09:28:32 | 29 Jan 19
+/check VC69          | From: Rick at 09:28:36 | 29 Jan 19

@@ -229,7 +229,7 @@ def logger(message):
 
 # Setup van de bot
 try:
-    bot = telepot.Bot("Si Sa Secret")
+    bot = telepot.Bot("777456350:AAGqUUcGe8jfiYuszM9V6p2ArrRbBTVRR3Y")
     print("Checking connection: ")
     print(bot.getMe())
 
