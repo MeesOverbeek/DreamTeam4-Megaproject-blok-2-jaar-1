@@ -42,8 +42,7 @@ $resultvoor = $conn->query($sqlvoor);
 //Zorgt ervoor dat alleen de containers die bijna vol zijn met de laatste meting geselecteerd worden en sorteert op hoe vol een container is
 $sqlid = "SELECT * FROM vuilcontainerproject.vuilcontainerStatus 
 WHERE percentageDiepte > 79
-AND datum = (SELECT MAX(datum) FROM vuilcontainerStatus WHERE FK_vuilcontainerID = FK_vuilcontainerID)
-GROUP BY FK_vuilcontainerID
+AND datum IN (SELECT MAX(datum) FROM vuilcontainerStatus GROUP BY FK_vuilcontainerID)
 ORDER BY percentageDiepte DESC";
 $resultid = $conn->query($sqlid);
 
