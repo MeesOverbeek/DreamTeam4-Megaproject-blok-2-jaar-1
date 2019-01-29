@@ -20,7 +20,7 @@ def connection_status(status):
             connection.remove(connection[0])
             connection.append(True)
     except ValueError:
-        print("\n*** STATUS PARAMATER ERROR ***\n")
+        print("\n*** STATUS PARAMETER ERROR ***\n")
 
 
 # Deze functie checkt de inputs van de gebruikers en geeft daarop informatie terug aan de gebruiker
@@ -50,7 +50,7 @@ def brain(message):
             bot.sendMessage(chat_id, str("Functies: /containers,\n/check [container ID], /werk, /extra"))
 
         elif command == "/extra":
-            bot.sendMessage(chat_id, str("Extra functies die ik kan uitvoeren:\n /info, /music, /versie, "
+            bot.sendMessage(chat_id, str("Extra functies die ik kan uitvoeren:\n /info\, /versie, "
                                          "/database [wachtwoord] (checkt de status van de database)"))
 
         elif command == "/versie":
@@ -169,6 +169,7 @@ def sql_checker():
 
     cursor.execute(
         "select * from vuilcontainerproject.vuilcontainerStatus group by FK_vuilcontainerID order by LENGTH(FK_vuilcontainerID), FK_vuilcontainerID;")
+
 
     rows = cursor.fetchall()
 
