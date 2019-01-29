@@ -45,9 +45,10 @@ def data_randomizer():
 
 
 # Functie die een packet een x aantal weken aan data maakt
-def packet_creator():
+def packet_creator(count):
+    print("Simulatie van {} weken...".format(count))
     packet = []
-    for i in range(0, 100000):
+    for i in range(0, count + 1):
         week_list = data_randomizer()
         packet.append(week_list)
 
@@ -73,13 +74,15 @@ def checker(week):
 
 # Dit is het "algoritme" dat zal bepalen welke dag de prullenbak gemiddeld vol raakt en op welk percentage
 def algoritme():
-    packet = packet_creator()
+    amount = input("Hoeveel weken wil je simuleren?: ")
+    packet = packet_creator(int(amount))
+
     results = []
     week_days = []
     full_per = []
 
     for i in range(0, len(packet)):
-        result = checker(packet[i], i + 1)
+        result = checker(packet[i])
         results.append(result)
 
     for i in range(0, len(results)):
@@ -98,12 +101,16 @@ def algoritme():
     avg_day = sum(week_days) / len(week_days)
     avg_per = sum(full_per) / len(full_per)
 
-    print("De optimale dag om het afval te legen is dag: {} | Met een gemiddelde vulling van {}%".format(round(avg_day), round(avg_per)))
+    print("\nDe optimale dag om het afval te legen is dag: {} | Met een gemiddelde vulling van {}%\n".format(round(avg_day), round(avg_per)))
     return_message = "De optimale dag om het afval te legen is dag: {} | Met een gemiddelde vulling van {}%".format(round(avg_day), round(avg_per))
     time = datetime.datetime.now().strftime("%d-%m-%y | %H:%M:%S")
 
     csvFile = "data.csv"
     with open(csvFile, 'a') as dataCSV:
         writer = csv.writer(dataCSV)
-        message =["Data toegevoegd: {} \n{}\n".format(time, return_message)]
+        message = ["Data toegevoegd: {} \n{}\n".format(time, return_message)]
         writer.writerow(message)
+
+
+while True:
+    algoritme()
