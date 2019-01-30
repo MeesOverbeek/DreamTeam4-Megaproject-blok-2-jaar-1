@@ -14,3 +14,18 @@
 /check VC69          | From: Rick at 09:10:04 | 29 Jan 19
 /containers          | From: Gijs at 09:28:32 | 29 Jan 19
 /check VC69          | From: Rick at 09:28:36 | 29 Jan 19
+/start               | From: Rick at 10:22:08 | 29 Jan 19
+/hrl                 | From: Rick at 10:22:08 | 29 Jan 19
+/help                | From: Rick at 10:22:08 | 29 Jan 19
+/help                | From: Rick at 10:22:16 | 29 Jan 19
+/containers          | From: Rick at 10:22:21 | 29 Jan 19
+/check               | From: Rick at 10:22:27 | 29 Jan 19
+/check VC23          | From: Rick at 10:22:33 | 29 Jan 19
+/werk                | From: Rick at 10:22:39 | 29 Jan 19
+/extra               | From: Rick at 10:22:50 | 29 Jan 19
+/info                | From: Rick at 10:22:52 | 29 Jan 19
+/versie              | From: Rick at 10:22:54 | 29 Jan 19
+/containers          | From: Rick at 10:23:15 | 29 Jan 19
+/containers          | From: Rick at 10:23:30 | 29 Jan 19
+/database nopass     | From: Rick at 10:23:47 | 29 Jan 19
+/containers          | From: Rick at 10:23:52 | 29 Jan 19
